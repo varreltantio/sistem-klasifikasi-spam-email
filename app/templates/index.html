@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% set active_page = "home" %}
+
+{% block head %}
+  <title>Sistem Klasifikasi Spam Email</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  {% include 'include/navbar.html' %}
+
+  <div class="row" id="jumbotron">
+    <div class="col-lg-5">
+      <div class="card mt-5 mb-5">
+        <div class="card-body">
+          <p class="pb-3">Masukkan pesan email yang ingin diperiksa</p>
+          <form>
+            <div class="mb-4">
+              <label for="message" class="form-label">Email Message</label>
+              <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+            </div>
+            <a id="predict" class="btn btn-primary">Check Message</a>
+          </form>
+        </div>
+
+        <div id="result-content">
+          <h5 class="mt-4">Hasil Klasifikasi Spam Email</h5>
+          <p>Pesan tersebut merupakan <span class="fw-bold" id="result"></span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7">
+      <img src="{{ url_for('static', filename='img/home.png') }}" alt="home" class="img-fluid">
+    </div>
+  </div>
+</div>
+
+{% include 'include/footer.html' %}
+{% endblock %}
+
+{% block js %}
+  <script>
+    $(document).ready(function() {
+      $("#predict").click(function(e) {
+        e.preventDefault();
+
+        var message = $("#message").val();
+
+        $.ajax("{{ url_for('predict') }}", {
+          data: JSON.stringify({
+            "message": message
+          }),
+          type: "POST",
+          contentType: 'application/json',
+          success: function(data) {
+            $("#result-content").addClass('active');
+
+            var label = {
+              'spam': 1,
+              'bukan spam': 0
+            };  
+
+            for (var key in label) {
+              if (label[key] == data.prediction) {
+                $('#result').text(key);
+              }
+            }
+          },
+          error: function(data) {
+            console.log(data);
+          }
+        });
+      });
+    });
+  </script>
+{% endblock %}
