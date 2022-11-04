@@ -71,7 +71,7 @@ df['clean_message'] = np.vectorize(
     preprocess_remove)('@[\w]*', df['clean_message'])
 df['clean_message'] = df['clean_message'].str.replace('[^a-zA-Z]', ' ')
 df['clean_message'] = df['clean_message'].apply(
-    lambda x: ' '.join([w for w in x.split() if len(w) > 3]))
+    lambda x: ' '.join([w for w in x.split() if len(w) > 2]))
 df
 
 nltk.download('punkt')
