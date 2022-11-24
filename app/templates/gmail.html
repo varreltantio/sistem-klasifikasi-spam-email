@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% set active_page = "gmail" %}
+
+{% block head %}
+  <title>Sistem Klasifikasi Spam Email</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  {% include 'include/navbar.html' %}
+
+  <div class="row" id="jumbotron">
+    <div class="col-lg-5">
+      <div class="card mt-5 mb-5">
+        <div class="card-body">
+          <p class="pb-3">Masukkan akun gmail yang ingin diperiksa</p>
+          <form>
+            <div class="mb-4">
+              <label for="email" class="form-label">Email</label>
+              <input type="text" class="form-control" id="email" name="email">
+            </div>
+            <div class="mb-4">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <a id="predict" class="btn btn-primary">Check Inbox</a>
+          </form>
+        </div>
+
+        <div id="result-content">
+          <h5 class="mt-4">Hasil Klasifikasi Spam Email</h5>
+          <p>Pesan tersebut merupakan <span class="fw-bold" id="result"></span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7">
+      <img src="{{ url_for('static', filename='img/home.png') }}" alt="home" class="img-fluid">
+    </div>
+  </div>
+</div>
+
+{% include 'include/footer.html' %}
+{% endblock %}
+
+{% block js %}
+  <script>
+    $(document).ready(function() {
+      $("#predict").click(function(e) {
+        e.preventDefault();
+
+        var email = $("#email").val();
+        var password = $("#password").val();
+
+        $.ajax("{{ url_for('predict_gmail') }}", {
+          data: JSON.stringify({
+            "email": email,
+            "password": password
+          }),
+          type: "POST",
+          contentType: 'application/json',
+          success: function(data) {
+            window.location.href = "result";
+          },
+          error: function(data) {
+            console.log(data);
+          }
+        });
+      });
+    });
+  </script>
+{% endblock %}

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% set active_page = "home" %}
+{% set active_page = "text" %}
 
 {% block head %}
   <title>Sistem Klasifikasi Spam Email</title>
@@ -10,34 +10,27 @@
   {% include 'include/navbar.html' %}
 
   <div class="row" id="jumbotron">
-    <div class="col-lg-5 mt-5">
-      <h1>Cek Mail dengan SPAMAIL</h1>
-      <p>SPAMAIL dikembangkan untuk membantu Anda 
-        mengecek pesan pada email termasuk spam atau bukan
-      </p>
+    <div class="col-lg-5">
+      <div class="card mt-5 mb-5">
+        <div class="card-body">
+          <p class="pb-3">Masukkan pesan email yang ingin diperiksa</p>
+          <form>
+            <div class="mb-4">
+              <label for="message" class="form-label">Email Message</label>
+              <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+            </div>
+            <a id="predict" class="btn btn-primary">Check Message</a>
+          </form>
+        </div>
+
+        <div id="result-content">
+          <h5 class="mt-4">Hasil Klasifikasi Spam Email</h5>
+          <p>Pesan tersebut merupakan <span class="fw-bold" id="result"></span></p>
+        </div>
+      </div>
     </div>
     <div class="col-lg-7">
       <img src="{{ url_for('static', filename='img/home.png') }}" alt="home" class="img-fluid">
-    </div>
-  </div>
-
-  <div class="row" id="features">
-    <h1 class="text-center mb-5">Fitur Utama</h1>
-    <div class="col-md-6">
-      <a href="{{ url_for('text') }}">
-        <div class="card card-1">
-          <h3>Predeksi Teks</h3>
-          <p>Melakukan prediksi spam secara langsung dengan memasukkan teks</p>
-        </div>
-      </a>
-    </div>
-    <div class="col-md-6">
-      <a href="{{ url_for('gmail') }}">
-        <div class="card card-2">
-          <h3>Predeksi Gmail</h3>
-          <p>Melakukan prediksi spam dengan ekstraksi data dari gmail</p>
-        </div>
-      </a>
     </div>
   </div>
 </div>

@@ -2,8 +2,26 @@ body {
   font-family: 'Poppins', sans-serif !important;
 }
 
+.navbar-nav {
+  margin-top: 30px;
+}
+
 .nav-link {
   color: #070F18 !important;
+}
+
+.card {
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  padding: 14px 80px 18px 36px;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
 #jumbotron {
@@ -20,11 +38,44 @@ body {
   line-height: 32px;
 }
 
-#jumbotron a {
-  margin-top: 10px;
-  border-radius: 50px;
-  padding: 10px 25px;
+#features {
+  margin-top: 100px;
 }
+
+#features a {
+  color: #000000;
+  text-decoration: none;
+}
+
+#features a:hover, a:focus {
+  color: #000000;
+}
+
+#features .card h3 {
+  font-weight: 600;
+}
+
+#features .card img {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  max-height: 120px;
+}
+
+#features .card-1 {
+  background-image: url(https://ionicframework.com/img/getting-started/ionic-native-card.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
+#features .card-2 {
+  background-image: url(https://ionicframework.com/img/getting-started/components-card.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80px;
+}
+
 
 #result-content {
   text-align: center;
@@ -37,7 +88,7 @@ body {
 }
 
 footer {
-  margin-top: 100px;
+  margin-top: 150px;
   padding: 20px 0;
   left: 0;
   bottom: 0;
@@ -50,6 +101,10 @@ footer p {
 }
 
 @media screen and (max-width: 992px) {
+  .card {
+    margin: 20px;
+  }
+
   #jumbotron img {
     margin-top: 80px;
   }

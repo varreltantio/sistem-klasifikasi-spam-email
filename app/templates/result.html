@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% set active_page = "gmail" %}
+
+{% block head %}
+  <title>Sistem Klasifikasi Spam Email</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  {% include 'include/navbar.html' %}
+
+  <div class="row" id="jumbotron">
+    <div class="col-lg table-responsive">
+      <table id="result" class="table">
+        <!-- HEADER ROW -->
+        <tr>
+          {% for col in header %}
+          <th>{{ col }}</th>
+          {% endfor %}
+        </tr>
+       
+        <!-- DATA ROWS -->
+        {% for row in rows %}
+        <tr>
+          {% for col in row %}
+          <td>{{ col }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+
+{% include 'include/footer.html' %}
+{% endblock %}
