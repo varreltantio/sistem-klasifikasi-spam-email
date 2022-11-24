@@ -1,5 +1,7 @@
 # sistem klasifikasi spam email dengan Naive Bayes
 
+SPAMAIL dikembangkan untuk membantu Anda mengecek pesan pada email termasuk spam atau bukan
+
 ## Installation
 
 Install with pip:
